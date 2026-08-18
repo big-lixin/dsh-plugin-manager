@@ -21,15 +21,15 @@
 
 ### 通过 dsh CLI（推荐）
 
-在本仓库目录下执行（或用 git / npm 包名形式）：
-
 ```powershell
-dsh plugin --profile web add .
+dsh plugin --profile web add github:big-lixin/dsh-plugin-manager
 ```
 
-该命令会把包安装进 profile 并自动完成挂载。
+该命令把包装进 profile（pnpm），并借助包内声明的 `dsh.bundle.patch` 层自动完成挂载。**bundle 层栈在启动时组合，所以 CLI 安装需要重启一次 DSH 才生效**。
 
-### 手动安装
+> 如果你之前用过下方的手动方式安装过本插件，请先从 `~/.dsh/profiles/web/cordis.patch.yml` 中删掉手写的那条 `insert` 挂载行，再切换到 CLI 渠道——两条相同的行会重复挂载。
+
+### 手动安装（可热挂载，无需重启）
 
 1. 把本仓库复制到 `~/.dsh/profiles/web/node_modules/dsh-plugin-manager`
 2. 在 `~/.dsh/profiles/web/cordis.patch.yml` 中追加挂载行：
@@ -40,7 +40,15 @@ dsh plugin --profile web add .
          name: dsh-plugin-manager
    ```
 
-3. 无需重启：该补丁文件被 HMR 监听，保存后 Host 半件立即挂载；**刷新浏览器页面**即可在 设置 → 插件 中看到"插件管理"标签页
+3. 该补丁文件被 HMR 监听，保存后 Host 半件立即挂载；**刷新浏览器页面**即可在 设置 → 插件 中看到"插件管理"标签页
+
+### 升级
+
+```powershell
+dsh plugin --profile web update dsh-plugin-manager
+```
+
+升级同样在下次重启后生效。
 
 ## 工作原理
 

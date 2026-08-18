@@ -21,15 +21,15 @@ A plugin manager for the [DeepSeek Harness](https://github.com/deepseek-ai/deeps
 
 ### Via the dsh CLI (recommended)
 
-From this repository's directory (or use a git URL / npm package name):
-
 ```powershell
-dsh plugin --profile web add .
+dsh plugin --profile web add github:big-lixin/dsh-plugin-manager
 ```
 
-The CLI installs the package into the profile and mounts it automatically.
+The CLI installs the package into the profile (via pnpm) and mounts it automatically through the `dsh.bundle.patch` layer declared in this package. **The bundle stack is composed at boot, so a CLI install takes effect on the next DSH restart.**
 
-### Manual installation
+> If you previously installed this plugin manually (below), remove the hand-written `insert` row from `~/.dsh/profiles/web/cordis.patch.yml` before switching to the CLI channel — two identical rows would double-mount it.
+
+### Manual installation (hot-mounts, no restart)
 
 1. Copy this repository to `~/.dsh/profiles/web/node_modules/dsh-plugin-manager`
 2. Append a mount row to `~/.dsh/profiles/web/cordis.patch.yml`:
@@ -40,7 +40,15 @@ The CLI installs the package into the profile and mounts it automatically.
          name: dsh-plugin-manager
    ```
 
-3. No restart needed: the patch file is watched (HMR), so the host half mounts as soon as you save. **Refresh the browser page** and the tab appears under Settings → Plugins.
+3. The patch file is watched (HMR), so the host half mounts as soon as you save. **Refresh the browser page** and the tab appears under Settings → Plugins.
+
+### Upgrading
+
+```powershell
+dsh plugin --profile web update dsh-plugin-manager
+```
+
+Upgrades also take effect on the next restart.
 
 ## How it works
 
