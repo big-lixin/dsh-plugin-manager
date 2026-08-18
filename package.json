@@ -1,0 +1,41 @@
+{
+  "name": "dsh-plugin-manager",
+  "version": "0.1.0",
+  "description": "DSH web plugin: a plugin-management tab in Settings > Plugins. Custom plugins (non-@deepseek-ai modules) can be enabled/disabled with immediate effect via the user patch layer; core components are listed read-only in a collapsed section.",
+  "type": "module",
+  "private": true,
+  "main": "lib/host.js",
+  "exports": {
+    ".": {
+      "default": "./lib/host.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-slots"
+      ],
+      "platform": "web"
+    }
+  },
+  "files": [
+    "lib/",
+    "README.md",
+    "README_EN.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "cordis",
+    "plugin",
+    "plugin-manager",
+    "settings"
+  ],
+  "license": "MIT"
+}
