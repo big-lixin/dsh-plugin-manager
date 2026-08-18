@@ -4,6 +4,10 @@ English | [中文](./README.md)
 
 A plugin manager for the [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (DSH) Web UI: adds a **Plugin Manager** tab to **Settings → Plugins** so you can inspect, enable, and disable installed plugins without touching any config file.
 
+## Screenshot
+
+![The Plugin Manager tab: custom plugins with toggles, core components collapsed and read-only](./docs/screenshot.png)
+
 ## Features
 
 - **Custom plugins** section (expanded by default): lists every user-installed plugin (any module outside the shipped `@deepseek-ai/*` scope counts as custom), each with a working toggle
